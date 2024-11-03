@@ -1,8 +1,8 @@
 ﻿using Grpc.Net.Client;
+using GrpcExperiments.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Grpc.Client;
 using ProtoBuf.Grpc.ClientFactory;
-using Shared.Contracts;
 using Gncf = Grpc.Net.ClientFactory;
 
 public class Program

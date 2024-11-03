@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
-namespace Shared.Contracts;
+namespace GrpcExperiments.Shared;
 
 [DataContract]
 public class HelloReply
@@ -22,6 +22,5 @@ public class HelloRequest
 public interface IGreeterService
 {
     [OperationContract]
-    Task<HelloReply> SayHelloAsync(HelloRequest request,
-        CallContext context = default);
+    Task<HelloReply> SayHelloAsync(HelloRequest request, CallContext context = default);
 }
