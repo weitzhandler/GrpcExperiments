@@ -16,7 +16,7 @@ public class GreeterServiceTests
         using var factory = new WebApplicationFactory<Program>();
 
         using var channel = GrpcChannel.ForAddress(factory.Server.BaseAddress, new GrpcChannelOptions
-        {
+        {            
             HttpClient = factory.CreateClient()
         });
 
@@ -34,10 +34,15 @@ public class GreeterServiceTests
         using var webApp = new WebApplicationFactory<Program>();
 
         var services = new ServiceCollection();
-        services.AddCodeFirstGrpcClient<IGreeterService>(o =>
-        {
-            o.Address = webApp.Server.BaseAddress;
-        });
+        services
+            .AddCodeFirstGrpcClient<IGreeterService>(nameof(IGreeterService), clientFactoryOptions =>
+            {
+                clientFactoryOptions.Address = webApp.Server.BaseAddress;
+                //clientFactoryOptions.ChannelOptionsActions.Add(options => options.HttpClient = webApp.CreateClient());
+            });
+            //.ConfigureChannel(channel => 
+            //    channel.HttpClient = webApp.CreateClient());
+
         var serviceProvider = services.BuildServiceProvider();
         var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
         var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));

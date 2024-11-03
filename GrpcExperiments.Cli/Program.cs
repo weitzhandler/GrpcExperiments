@@ -9,7 +9,11 @@ public class Program
 {
     public static async Task Main()
     {
+        await CreateClientOld();
         await CreateClientNew();
+
+        Console.WriteLine("Press any key to exit...");
+        Console.ReadKey();
     }
 
     static async Task CreateClientNew()
@@ -26,9 +30,7 @@ public class Program
         var reply = await client.SayHelloAsync(
             new HelloRequest { Name = "GreeterClient" });
 
-        Console.WriteLine($"Greeting: {reply.Message}");
-        Console.WriteLine("Press any key to exit...");
-        Console.ReadKey();
+        Console.WriteLine($"Greeting (new): {reply.Message}");
     }
 
     static async Task CreateClientOld()
@@ -39,8 +41,6 @@ public class Program
         var reply = await client.SayHelloAsync(
             new HelloRequest { Name = "GreeterClient" });
 
-        Console.WriteLine($"Greeting: {reply.Message}");
-        Console.WriteLine("Press any key to exit...");
-        Console.ReadKey();
+        Console.WriteLine($"Greeting (old): {reply.Message}");
     }
 }
