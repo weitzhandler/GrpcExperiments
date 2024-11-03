@@ -16,7 +16,7 @@ public class GreeterServiceTests
         using var webApp = new WebApplicationFactory<Program>();
 
         using var channel = GrpcChannel.ForAddress(webApp.Server.BaseAddress, new GrpcChannelOptions
-        {            
+        {
             HttpClient = webApp.CreateClient()
         });
 
@@ -28,26 +28,26 @@ public class GreeterServiceTests
         Assert.Equal("Hello GreeterClient", reply.Message);
     }
 
-[Fact]
-public async Task TestViaCodeFirst()
-{
-    using var webApp = new WebApplicationFactory<Program>();
+    [Fact]
+    public async Task TestViaCodeFirst()
+    {
+        using var webApp = new WebApplicationFactory<Program>();
 
-    var services = new ServiceCollection();
-    services
-        .AddCodeFirstGrpcClient<IGreeterService>(clientFactoryOptions =>
-        {
-            clientFactoryOptions.Address = webApp.Server.BaseAddress;
-            clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
-        });
+        var services = new ServiceCollection();
+        services
+            .AddCodeFirstGrpcClient<IGreeterService>(clientFactoryOptions =>
+            {
+                clientFactoryOptions.Address = webApp.Server.BaseAddress;
+                clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
+            });
 
-    var serviceProvider = services.BuildServiceProvider();
-    var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
-    var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));
+        var serviceProvider = services.BuildServiceProvider();
+        var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
+        var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));
 
-    var reply = await client.SayHelloAsync(
-        new HelloRequest { Name = "GreeterClient" });
+        var reply = await client.SayHelloAsync(
+            new HelloRequest { Name = "GreeterClient" });
 
-    Assert.Equal("Hello GreeterClient", reply.Message);
-}
+        Assert.Equal("Hello GreeterClient", reply.Message);
+    }
 }
