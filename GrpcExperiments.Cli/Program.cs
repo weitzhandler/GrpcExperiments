@@ -23,7 +23,7 @@ public class Program
         {
             o.Address = new Uri("https://localhost:7158");
         });
-        var serviceProvider = services.BuildServiceProvider();
+        using var serviceProvider = services.BuildServiceProvider();
         var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
         var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));
 

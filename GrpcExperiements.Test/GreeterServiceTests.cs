@@ -41,7 +41,7 @@ public class GreeterServiceTests
                 clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
             });
 
-        var serviceProvider = services.BuildServiceProvider();
+        using var serviceProvider = services.BuildServiceProvider();
         var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
         var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));
 

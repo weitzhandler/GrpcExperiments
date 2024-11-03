@@ -20,7 +20,7 @@ public class EntityServiceTests
                 clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
             });
 
-        var serviceProvider = services.BuildServiceProvider();
+        using var serviceProvider = services.BuildServiceProvider();
         var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
         var client = factory.CreateClient<IEntityService<Entity>>(nameof(IEntityService<Entity>));
 
@@ -43,7 +43,7 @@ public class EntityServiceTests
                 clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
             });
 
-        var serviceProvider = services.BuildServiceProvider();
+        using var serviceProvider = services.BuildServiceProvider();
         var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
         var client = factory.CreateClient<IEntityService<Entity>>(nameof(IEntityService<Entity>));
 
