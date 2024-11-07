@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Grpc.Client;
 using ProtoBuf.Grpc.ClientFactory;
-using Gncf = Grpc.Net.ClientFactory;
+using Gnc = Grpc.Net.ClientFactory;
 
 namespace GrpcExperiements.Test;
 
@@ -42,7 +42,7 @@ public class GreeterServiceTests
             });
 
         using var serviceProvider = services.BuildServiceProvider();
-        var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
+        var factory = serviceProvider.GetRequiredService<Gnc.GrpcClientFactory>();
         var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));
 
         var reply = await client.SayHelloAsync(
