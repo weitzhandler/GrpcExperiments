@@ -18,4 +18,6 @@ public class EntityService<TEntity> : IEntityService<TEntity>
     {
         return Task.FromResult((Entity?)new Entity { Name = parameter.Param.ToString() });
     }
+
+    public Task SaveAll(TEntity[] entities) => Task.CompletedTask;
 }

@@ -9,19 +9,21 @@ public interface IEntityService<TEntity> where TEntity : class
 
     [OperationContract]
     Task<IEnumerable<Entity>> GetAll();
+
+    [OperationContract]
+    Task SaveAll(TEntity[] entities);
 }
 
 [DataContract]
 public class EntityRequest<TParam>
 {
     [DataMember(Order = 1)]
-    public TParam? Param { get; set; }
+    public required TParam Param { get; set; }
 }
 
 [DataContract]
 public class Entity
 {
     [DataMember(Order = 1)]
-    public string? Name { get; set; }
-
+    public required string Name { get; set; }
 }

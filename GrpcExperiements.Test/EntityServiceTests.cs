@@ -51,5 +51,30 @@ public class EntityServiceTests
         Assert.Equal(2, reply.Count());
     }
 
+    [Fact]
+    public async Task TestSaveAll()
+    {
+        using var webApp = new WebApplicationFactory<Program>();
+
+        var services = new ServiceCollection();
+        services
+            .AddCodeFirstGrpcClient<IEntityService<Entity>>(nameof(IEntityService<Entity>), clientFactoryOptions =>
+            {
+                clientFactoryOptions.Address = webApp.Server.BaseAddress;
+                clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
+            });
+
+        using var serviceProvider = services.BuildServiceProvider();
+        var factory = serviceProvider.GetRequiredService<Gncf.GrpcClientFactory>();
+        var client = factory.CreateClient<IEntityService<Entity>>(nameof(IEntityService<Entity>));
+
+        Entity[] entities =
+        [
+            new() { Name = "Entity 1" },
+            new() { Name = "Entity 2" }
+        ];
+
+        await client.SaveAll(entities);        
+    }
 
 }
