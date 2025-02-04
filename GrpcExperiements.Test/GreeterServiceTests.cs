@@ -50,4 +50,31 @@ public class GreeterServiceTests
 
         Assert.Equal("Hello GreeterClient", reply.Message);
     }
+
+    [Fact]
+    public async Task Test_using_code_first_multiple_calls()
+    {
+        using var webApp = new WebApplicationFactory<Program>();
+
+        var services = new ServiceCollection();
+        services
+            .AddCodeFirstGrpcClient<IGreeterService>(clientFactoryOptions =>
+            {
+                clientFactoryOptions.Address = webApp.Server.BaseAddress;
+                clientFactoryOptions.ChannelOptionsActions.Add(option => option.HttpHandler = webApp.Server.CreateHandler());
+            });
+
+        using var serviceProvider = services.BuildServiceProvider();
+        var factory = serviceProvider.GetRequiredService<Gnc.GrpcClientFactory>();
+        var client = factory.CreateClient<IGreeterService>(nameof(IGreeterService));
+
+        var current = 0;
+        var replyTask = client.SayHelloAsync(
+            new HelloRequest { Name = $"GreeterClient {current}" });
+
+        var tasks = Enumerable.Repeat(replyTask, 5);
+        var results = await Task.WhenAll(tasks);
+
+        Assert.Equal(5, results.Length);
+    }
 }
