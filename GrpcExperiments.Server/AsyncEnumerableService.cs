@@ -1,4 +1,7 @@
-﻿using ProtoBuf.Grpc;
+﻿using GrpcExperiments.Shared;
+using ProtoBuf.Grpc;
+
+namespace GrpcExperiments.Server;
 
 public class MyTimeService : ITimeService
 {

@@ -1,4 +1,5 @@
 using Grpc.Net.Client;
+using GrpcExperiments.Shared;
 using Microsoft.AspNetCore.Mvc.Testing;
 using ProtoBuf.Grpc.Client;
 
@@ -7,7 +8,7 @@ namespace GrpcExperiements.Test;
 public class PolymorphismTests
 {
     [Fact]
-    public async Task TestViaGrpcChannel()
+    public async Task Test_using_gRPC_channel()
     {
         using var webApp = new WebApplicationFactory<Program>();
 

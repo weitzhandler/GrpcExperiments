@@ -1,4 +1,4 @@
-﻿
+﻿using GrpcExperiments.Shared;
 
 namespace GrpcExperiments.Server;
 

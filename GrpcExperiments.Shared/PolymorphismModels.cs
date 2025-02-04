@@ -2,6 +2,8 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
+namespace GrpcExperiments.Shared;
+
 [ServiceContract]
 public interface IPolymorphismService
 {

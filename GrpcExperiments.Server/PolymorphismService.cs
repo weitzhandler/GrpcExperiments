@@ -1,4 +1,6 @@
-﻿namespace GrpcExperiments.Server;
+﻿using GrpcExperiments.Shared;
+
+namespace GrpcExperiments.Server;
 
 public class PolymorphismService : IPolymorphismService
 {

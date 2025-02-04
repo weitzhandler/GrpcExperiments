@@ -11,7 +11,7 @@ namespace GrpcExperiements.Test;
 public class GreeterServiceTests
 {
     [Fact]
-    public async Task TestViaGrpcChannel()
+    public async Task Test_using_gRPC_channel()
     {
         using var webApp = new WebApplicationFactory<Program>();
 
@@ -29,7 +29,7 @@ public class GreeterServiceTests
     }
 
     [Fact]
-    public async Task TestViaCodeFirst()
+    public async Task Test_using_code_first()
     {
         using var webApp = new WebApplicationFactory<Program>();
 

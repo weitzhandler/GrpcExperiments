@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using GrpcExperiments.Shared;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Grpc;
@@ -10,7 +11,7 @@ namespace GrpcExperiements.Test;
 public class AsyncEnumerableTests
 {
     [Fact]
-    public async Task TestViaCodeFirst()
+    public async Task Test_using_code_first()
     {
         using var webApp = new WebApplicationFactory<Program>();
 

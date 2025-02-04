@@ -1,4 +1,5 @@
 using GrpcExperiments.Server;
+using GrpcExperiments.Shared;
 using ProtoBuf.Grpc.Server;
 
 var builder = WebApplication.CreateBuilder(args);

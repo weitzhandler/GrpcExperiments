@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using GrpcExperiments.Shared;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Grpc.ClientFactory;
 using Gncf = Grpc.Net.ClientFactory;
@@ -8,7 +9,7 @@ public class EntityServiceTests
 {
 
     [Fact]
-    public async Task TestGetById()
+    public async Task Test_GetById()
     {
         using var webApp = new WebApplicationFactory<Program>();
 
@@ -31,7 +32,7 @@ public class EntityServiceTests
     }
 
     [Fact]
-    public async Task TestGetAll()
+    public async Task Test_GetAll()
     {
         using var webApp = new WebApplicationFactory<Program>();
 
@@ -52,7 +53,7 @@ public class EntityServiceTests
     }
 
     [Fact]
-    public async Task TestSaveAll()
+    public async Task Test_SaveAll()
     {
         using var webApp = new WebApplicationFactory<Program>();
 

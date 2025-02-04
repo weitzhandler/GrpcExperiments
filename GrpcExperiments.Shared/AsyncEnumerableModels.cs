@@ -1,6 +1,8 @@
 ﻿using ProtoBuf.Grpc;
 using System.ServiceModel;
 
+namespace GrpcExperiments.Shared;
+
 [ServiceContract]
 public interface ITimeService
 {
