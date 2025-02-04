@@ -8,13 +8,11 @@ public class MyTimeService : ITimeService
     {
         var cancellationToken = context.CancellationToken;
 
-        var interval = TimeSpan.FromSeconds(reqest.Interval);
-
         while (!cancellationToken.IsCancellationRequested)
         {
-            await Task.Delay(interval, cancellationToken);
+            await Task.Delay(reqest.Interval, cancellationToken);
             yield return new TimeResult(DateTime.UtcNow);
         }
-
+        yield break;
     }
 }
